@@ -2067,7 +2067,7 @@ async function handleBranchesAction(
       {
         parse_mode: "HTML",
         reply_markup: new InlineKeyboard()
-          .webApp("🗺️ Wszystkie kantory", `${config.webAppUrl}/branches`)
+          .webApp("🗺️ Wszystkie kantory", `${config.webAppUrl}/kantory`)
           .row()
           .text("🔙 Kantory", "menu_branches"),
       }
@@ -2109,7 +2109,7 @@ async function handleBranchesAction(
       {
         parse_mode: "HTML",
         reply_markup: new InlineKeyboard()
-          .webApp("🗺️ Sprawdź oddział", `${config.webAppUrl}/branches`)
+          .webApp("🗺️ Sprawdź oddział", `${config.webAppUrl}/kantory`)
           .row()
           .text("🔙 Kantory", "menu_branches"),
       }
