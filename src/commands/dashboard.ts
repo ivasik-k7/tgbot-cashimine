@@ -106,7 +106,7 @@ async function getMarketSnapshot(): Promise<{
  * Mock: basic user overview.
  * Replace with DB/API lookups.
  */
-async function getUserOverview(userId?: number): Promise<{
+async function getUserOverview(_?: number): Promise<{
   clientType: string;
   nearestBranch: string;
   lastOperation: string;

@@ -427,7 +427,7 @@ async function handleUserAction(ctx: BotContext, data: string): Promise<void> {
  * Handle admin action callbacks
  */
 async function handleAdminAction(ctx: BotContext, data: string): Promise<void> {
-  const userId = ctx.from?.id;
+  // const userId = ctx.from?.id;
 
   if (!isAdmin) {
     await ctx.answerCallbackQuery({
@@ -1455,7 +1455,7 @@ async function handleConfirmation(
 ): Promise<void> {
   const parts = data.split("_");
   const action = parts[1];
-  const id = parts[2];
+  // const id = parts[2];
   const choice = parts[3];
 
   if (choice === "yes") {
@@ -1596,7 +1596,7 @@ ${userStats.recentActivity
 // Data Fetching Functions (Mock implementations)
 // ============================================================================
 
-async function getUserStats(userId?: number): Promise<{
+async function getUserStats(_?: number): Promise<{
   balance: number;
   todayEarnings: number;
   hashRate: number;
@@ -1626,7 +1626,7 @@ async function getUserStats(userId?: number): Promise<{
   };
 }
 
-async function getMiningStats(userId?: number): Promise<{
+async function getMiningStats(_?: number): Promise<{
   sessionStart: number;
   hashRate: number;
   shares: number;
@@ -1646,7 +1646,7 @@ async function getMiningStats(userId?: number): Promise<{
   };
 }
 
-async function getReferralStats(userId?: number): Promise<{
+async function getReferralStats(_?: number): Promise<{
   total: number;
   active: number;
   earnings: number;

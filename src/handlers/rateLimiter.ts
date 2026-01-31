@@ -9,7 +9,9 @@ const logger = new Logger("RateLimiter");
 // In-memory store for rate limiting (use Redis in production)
 const requestStore = new Map<number, number[]>();
 
-export function createRateLimiter(options?: RateLimitOptions): Middleware<BotContext> {
+export function createRateLimiter(
+  options?: RateLimitOptions
+): Middleware<BotContext> {
   const {
     maxRequests = HANDLER_CONSTANTS.RATE_LIMIT.DEFAULT_MAX_REQUESTS,
     timeWindow = HANDLER_CONSTANTS.RATE_LIMIT.DEFAULT_WINDOW_MS,
@@ -20,7 +22,7 @@ export function createRateLimiter(options?: RateLimitOptions): Middleware<BotCon
 
   if (!enabled) {
     logger.info("Rate limiter is disabled");
-    return async (ctx, next) => await next();
+    // return async (_) => await next();
   }
 
   return async (ctx, next) => {
@@ -36,7 +38,9 @@ export function createRateLimiter(options?: RateLimitOptions): Middleware<BotCon
     let userRequests = requestStore.get(userId) || [];
 
     // Clean old requests
-    userRequests = userRequests.filter(timestamp => now - timestamp < timeWindow);
+    userRequests = userRequests.filter(
+      (timestamp) => now - timestamp < timeWindow
+    );
 
     if (userRequests.length >= maxRequests) {
       logger.warn(`Rate limit exceeded for user ${userId}`, {
@@ -46,7 +50,7 @@ export function createRateLimiter(options?: RateLimitOptions): Middleware<BotCon
       });
 
       try {
-        if (ctx.chat?.type === 'private') {
+        if (ctx.chat?.type === "private") {
           await ctx.reply(cooldownMessage, { parse_mode: "HTML" });
         }
       } catch (error) {
@@ -68,12 +72,15 @@ export function createRateLimiter(options?: RateLimitOptions): Middleware<BotCon
   };
 }
 
-function cleanupOldEntries(store: Map<number, number[]>, timeWindow: number): void {
+function cleanupOldEntries(
+  store: Map<number, number[]>,
+  timeWindow: number
+): void {
   const now = Date.now();
   const cutoffTime = now - timeWindow * 10; // Keep some history
 
   for (const [userId, timestamps] of store.entries()) {
-    const validTimestamps = timestamps.filter(t => t > cutoffTime);
+    const validTimestamps = timestamps.filter((t) => t > cutoffTime);
     if (validTimestamps.length === 0) {
       store.delete(userId);
     } else {
@@ -83,6 +90,9 @@ function cleanupOldEntries(store: Map<number, number[]>, timeWindow: number): vo
 }
 
 export function cleanupRateLimitStore(): void {
-  cleanupOldEntries(requestStore, HANDLER_CONSTANTS.RATE_LIMIT.DEFAULT_WINDOW_MS);
+  cleanupOldEntries(
+    requestStore,
+    HANDLER_CONSTANTS.RATE_LIMIT.DEFAULT_WINDOW_MS
+  );
   logger.debug("Cleaned up rate limit store");
 }

@@ -9,10 +9,10 @@ const logger = new Logger("ErrorHandler");
 export async function errorHandler(err: BotError<BotContext>): Promise<void> {
   const ctx = err.ctx;
   const error = err.error;
-  
+
   // Gather enriched context details
   const errorContext = gatherErrorContext(ctx);
-  
+
   // Enhanced error classification and handling
   if (error instanceof GrammyError) {
     await handleGrammyError(error, ctx, errorContext);
@@ -27,9 +27,9 @@ export async function errorHandler(err: BotError<BotContext>): Promise<void> {
 }
 
 function gatherErrorContext(ctx: BotContext): ErrorContext {
-  const updateType = Object.keys(ctx.update)
-    .find(key => key !== 'update_id') || 'unknown';
-    
+  const updateType =
+    Object.keys(ctx.update).find((key) => key !== "update_id") || "unknown";
+
   return {
     updateId: ctx.update.update_id,
     userId: ctx.from?.id,
@@ -46,13 +46,13 @@ function gatherErrorContext(ctx: BotContext): ErrorContext {
 }
 
 async function handleGrammyError(
-  error: GrammyError, 
-  ctx: BotContext, 
+  error: GrammyError,
+  _: BotContext,
   context: ErrorContext
 ): Promise<void> {
   const errorCode = error.error_code;
-  const description = error.description || 'No description';
-  
+  const description = error.description || "No description";
+
   logger.error(`[GrammyError] ${description}`, {
     ...context,
     errorCode,
@@ -85,19 +85,19 @@ async function handleGrammyError(
 }
 
 async function handleHttpError(
-  error: HttpError, 
-  ctx: BotContext, 
+  error: HttpError,
+  ctx: BotContext,
   context: ErrorContext
 ): Promise<void> {
   logger.error(`[HttpError] Network error: ${error.message}`, {
     ...context,
     errorMessage: error.message,
   });
-  
+
   // Implement exponential backoff for retries
   const MAX_RETRIES = HANDLER_CONSTANTS.ERROR_HANDLING.MAX_ERROR_RETRIES;
   let retryCount = 0;
-  
+
   while (retryCount < MAX_RETRIES) {
     try {
       // Attempt to retry the failed request
@@ -107,19 +107,19 @@ async function handleHttpError(
     } catch (retryError) {
       retryCount++;
       const delay = Math.pow(2, retryCount) * 1000; // Exponential backoff
-      await new Promise(resolve => setTimeout(resolve, delay));
+      await new Promise((resolve) => setTimeout(resolve, delay));
     }
   }
 }
 
 async function handleUnknownError(
-  error: unknown, 
-  ctx: BotContext, 
+  error: unknown,
+  _: BotContext,
   context: ErrorContext
 ): Promise<void> {
   const errorMessage = error instanceof Error ? error.message : String(error);
   const stackTrace = error instanceof Error ? error.stack : undefined;
-  
+
   logger.error(`[UnknownError] ${errorMessage}`, {
     ...context,
     errorMessage,
@@ -132,81 +132,90 @@ async function handleUnknownError(
   }
 }
 
-async function provideUserFeedback(ctx: BotContext, updateId: number): Promise<void> {
-  const FEEDBACK_COOLDOWN = HANDLER_CONSTANTS.ERROR_HANDLING.FEEDBACK_COOLDOWN_MS;
+async function provideUserFeedback(
+  ctx: BotContext,
+  updateId: number
+): Promise<void> {
+  const FEEDBACK_COOLDOWN =
+    HANDLER_CONSTANTS.ERROR_HANDLING.FEEDBACK_COOLDOWN_MS;
   const cooldownKey = `error_feedback_${ctx.chat?.id}_${ctx.from?.id}`;
-  
+
   // Simple in-memory rate limiting
   if (!global.errorCooldown) global.errorCooldown = new Map();
   const lastFeedback = global.errorCooldown.get(cooldownKey) || 0;
   const now = Date.now();
-  
+
   if (now - lastFeedback < FEEDBACK_COOLDOWN) {
     return; // Skip feedback to avoid spamming
   }
-  
+
   try {
     if (!ctx.chat) return;
-    
+
     const errorReference = `ERR-${updateId.toString(36).toUpperCase()}-${Date.now().toString(36)}`;
-    
+
     // Tailored responses based on environment
     if (config.isProduction) {
       await sendProductionErrorFeedback(ctx, errorReference);
     } else {
       await sendDevelopmentErrorFeedback(ctx, errorReference);
     }
-    
+
     // Update cooldown
     global.errorCooldown.set(cooldownKey, now);
-    
   } catch (feedbackError) {
     logger.warn("Failed to send error feedback to user:", feedbackError);
   }
 }
 
-async function sendProductionErrorFeedback(ctx: BotContext, errorReference: string) {
+async function sendProductionErrorFeedback(
+  ctx: BotContext,
+  errorReference: string
+) {
   if (ctx.callbackQuery) {
     await ctx.answerCallbackQuery({
       text: "⚠️ An error occurred. Please try again.",
       show_alert: true,
     });
-  } else if (ctx.chat?.type === 'private') {
+  } else if (ctx.chat?.type === "private") {
     await ctx.reply(
       `❌ <b>Something went wrong</b>\n\n` +
-      `I've encountered an error. Please try again in a moment.\n\n` +
-      `<i>Reference: <code>${errorReference}</code></i>`,
+        `I've encountered an error. Please try again in a moment.\n\n` +
+        `<i>Reference: <code>${errorReference}</code></i>`,
       { parse_mode: "HTML" }
     );
   } else {
     // Group chats - less verbose
-    await ctx.reply(
-      `⚠️ Bot error. Admins have been notified.`,
-      { parse_mode: "HTML" }
-    );
+    await ctx.reply(`⚠️ Bot error. Admins have been notified.`, {
+      parse_mode: "HTML",
+    });
   }
 }
 
-async function sendDevelopmentErrorFeedback(ctx: BotContext, errorReference: string) {
+async function sendDevelopmentErrorFeedback(
+  ctx: BotContext,
+  errorReference: string
+) {
   // More detailed feedback in development
-  const message = ctx.update.message?.text || ctx.update.callback_query?.data || 'Unknown';
-  
+  const message =
+    ctx.update.message?.text || ctx.update.callback_query?.data || "Unknown";
+
   await ctx.reply(
     `🐛 <b>Development Error</b>\n\n` +
-    `Command: <code>${message.substring(0, 50)}</code>\n` +
-    `Ref: <code>${errorReference}</code>\n\n` +
-    `Check server logs for details.`,
+      `Command: <code>${message.substring(0, 50)}</code>\n` +
+      `Ref: <code>${errorReference}</code>\n\n` +
+      `Check server logs for details.`,
     { parse_mode: "HTML" }
   );
 }
 
 async function logToExternalService(
-  errorMessage: string, 
-  stackTrace: string, 
+  errorMessage: string,
+  stackTrace: string,
   context: ErrorContext
 ): Promise<void> {
   // Implement based on your monitoring service (Sentry, DataDog, etc.)
-  console.error('EXTERNAL LOGGING:', {
+  console.error("EXTERNAL LOGGING:", {
     error: errorMessage,
     stack: stackTrace,
     context,
