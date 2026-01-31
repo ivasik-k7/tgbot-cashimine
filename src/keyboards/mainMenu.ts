@@ -8,134 +8,180 @@ export const MainMenu = {
 
   welcome() {
     return new InlineKeyboard()
-      .webApp("🚀 Launch App", config.webAppUrl)
+      .webApp("🚀 Otwórz aplikację", config.webAppUrl)
       .row()
-      .text("📊 Dashboard", "menu_dashboard")
-      .text("💰 Wallet", "menu_wallet")
+      .text("📊 Panel", "menu_dashboard")
+      .text("💰 Portfel", "menu_wallet")
       .row()
-      .text("⛏️ Mining", "menu_mining")
-      .text("👥 Referral", "menu_referral")
+      .text("💱 Wymiana", "menu_exchange")
+      .text("🥇 Inwestycje", "menu_investments")
       .row()
-      .text("🆘 Help", "menu_help")
-      .text("⚙️ Settings", "menu_settings");
+      .text("📍 Kantory", "menu_branches")
+      .text("👥 Polecenia", "menu_referral")
+      .row()
+      .text("🆘 Pomoc", "menu_help")
+      .text("⚙️ Ustawienia", "menu_settings");
   },
 
   dashboard() {
     return new InlineKeyboard()
-      .webApp("📊 Full Dashboard", `${config.webAppUrl}/dashboard`)
+      .webApp("📊 Pełny panel", `${config.webAppUrl}/dashboard`)
       .row()
-      .text("⛏️ Start Mining", "mining_start")
-      .text("💰 Quick Deposit", "action_deposit")
+      .text("💱 Wymień teraz", "exchange_quick")
+      .text("📈 Kursy", "rates_current")
       .row()
-      .text("📈 Live Stats", "mining_stats")
-      .text("⚡ Boost", "action_boost")
+      .text("📜 Historia", "transactions_recent")
+      .text("🏆 Poziom konta", "account_tier")
       .row()
-      .text("🎯 Missions", "action_missions")
-      .text("🔄 Refresh", "dashboard_refresh")
+      .text("💼 Oferta B2B", "b2b_info")
+      .text("🔄 Odśwież", "dashboard_refresh")
       .row()
-      .text("📥 Export Data", "dashboard_export")
-      .text("🔙 Main Menu", "menu_main");
+      .text("📥 Eksport danych", "dashboard_export")
+      .text("🔙 Menu główne", "menu_main");
   },
 
-  // Complete wallet management menu
+  // Wallet management menu
   wallet() {
     return new InlineKeyboard()
-      .webApp("💰 Full Wallet", `${config.webAppUrl}/wallet`)
+      .webApp("💰 Pełny portfel", `${config.webAppUrl}/wallet`)
       .row()
-      .text("💸 Withdraw", "wallet_withdraw")
-      .text("💰 Deposit", "wallet_deposit")
+      .text("💸 Wypłać", "wallet_withdraw")
+      .text("💰 Wpłać", "wallet_deposit")
       .row()
-      .text("🔒 Stake", "wallet_stake")
-      .text("💱 Convert", "wallet_convert")
+      .text("📊 Salda", "wallet_balances")
+      .text("📜 Historia", "wallet_history")
       .row()
-      .text("📜 History", "wallet_history")
-      .text("📈 Analytics", "wallet_analytics")
+      .text("🔄 Transfer", "wallet_transfer")
+      .text("🧮 Kalkulator", "wallet_calculator")
       .row()
-      .text("🔐 Security", "wallet_security")
-      .text("🧮 Calculator", "wallet_calc")
-      .row()
-      .text("🔙 Main Menu", "menu_main");
+      .text("🔐 Zabezpieczenia", "wallet_security")
+      .text("🔙 Menu główne", "menu_main");
   },
 
-  // Mining control menu
-  mining() {
+  // Exchange menu
+  exchange() {
     return new InlineKeyboard()
-      .webApp("⛏️ Mining Hub", `${config.webAppUrl}/mining`)
+      .webApp("💱 Pełna wymiana", `${config.webAppUrl}/exchange`)
       .row()
-      .text("▶️ Start", "mining_start")
-      .text("⏸️ Stop", "mining_stop")
+      .text("₿ Krypto → PLN", "exchange_crypto_to_pln")
+      .text("💵 PLN → Krypto", "exchange_pln_to_crypto")
       .row()
-      .text("⚡ Boost", "mining_boost")
-      .text("📊 Stats", "mining_stats")
+      .text("🔄 Krypto ↔ Krypto", "exchange_crypto_to_crypto")
+      .text("💶 PLN ↔ EUR", "exchange_fiat")
       .row()
-      .text("⚙️ Configure", "mining_config")
-      .text("🏊 Pool", "mining_pool")
+      .text("📈 Kursy na żywo", "rates_live")
+      .text("🧮 Kalkulator", "exchange_calculator")
       .row()
-      .text("💡 How It Works", "mining_how")
-      .text("🔙 Main Menu", "menu_main");
+      .text("📍 Rezerwuj w kantorze", "exchange_reserve")
+      .text("💡 Jak wymienić", "exchange_how")
+      .row()
+      .text("🔙 Menu główne", "menu_main");
   },
 
-  // Comprehensive referral menu
+  // Investments menu (precious metals + staking)
+  investments() {
+    return new InlineKeyboard()
+      .webApp("🥇 Hub inwestycji", `${config.webAppUrl}/investments`)
+      .row()
+      .text("🥇 Złoto", "invest_gold")
+      .text("🥈 Srebro", "invest_silver")
+      .row()
+      .text("🔒 Staking", "invest_staking")
+      .text("📊 Portfel", "invest_portfolio")
+      .row()
+      .text("📈 Analiza rynku", "invest_analysis")
+      .text("💡 Porady", "invest_tips")
+      .row()
+      .text("🔙 Menu główne", "menu_main");
+  },
+
+  // Branches/locations menu
+  branches() {
+    return new InlineKeyboard()
+      .webApp("🗺️ Mapa kantorów", `${config.webAppUrl}/branches`)
+      .row()
+      .text("📍 Warszawa", "branches_warsaw")
+      .text("📍 Kraków", "branches_krakow")
+      .row()
+      .text("📍 Wrocław", "branches_wroclaw")
+      .text("📍 Poznań", "branches_poznan")
+      .row()
+      .text("📍 Gdańsk", "branches_gdansk")
+      .text("📍 Inne miasta", "branches_other")
+      .row()
+      .text("📅 Rezerwacja", "branches_reserve")
+      .text("⏰ Godziny otwarcia", "branches_hours")
+      .row()
+      .text("🔙 Menu główne", "menu_main");
+  },
+
+  // Referral menu
   referral(userId: number) {
     return new InlineKeyboard()
       .url(
-        "📱 Share with Friends",
-        `https://t.me/share/url?url=https://t.me/${config.botUsername}?start=ref_${userId}&text=${encodeURIComponent("🤝 Cashimine Invitation\n\nHi! I wanted to share Cashimine with you. I've been using it to learn about crypto earnings and find it to be a genuine platform for beginners.\n\n📊 Highlights:\n• Educational crypto tasks\n• Transparent earning system\n• Simple to get started\n\nIf you're curious about crypto, you might enjoy checking it out:")}`
+        "📱 Udostępnij znajomym",
+        `https://t.me/share/url?url=https://t.me/${config.botUsername}?start=ref_${userId}&text=${encodeURIComponent(
+          "🎉 Zaproszenie do CashyMine\n\n" +
+            "Cześć! Chciałem podzielić się z Tobą CashyMine - bezpieczną siecią kantorów kryptowalut i metali szlachetnych w Polsce.\n\n" +
+            "📊 Najważniejsze:\n" +
+            "• Licencjonowany podmiot\n" +
+            "• 12+ kantorów w Polsce\n" +
+            "• Najlepsze kursy wymiany\n" +
+            "• Inwestycje w złoto i srebro\n\n" +
+            "Jeśli interesujesz się kryptowalutami, sprawdź:"
+        )}`
       )
       .row()
-      .text("📊 My Stats", "referral_stats")
-      .text("🏆 Tiers", "referral_tiers")
+      .text("📊 Moje statystyki", "referral_stats")
+      .text("🏆 Poziomy", "referral_tiers")
       .row()
-      .text("🎁 Rewards", "referral_rewards")
-      .text("📈 Leaderboard", "referral_leaderboard")
+      .text("🎁 Nagrody", "referral_rewards")
+      .text("📈 Ranking", "referral_leaderboard")
       .row()
-      .text("🔗 Copy Link", "referral_copy")
-      .text("📣 Share Options", "referral_share")
+      .text("🔗 Kopiuj link", "referral_copy")
+      .text("📣 Opcje udostępniania", "referral_share")
       .row()
-      .text("📧 Email Friends", "referral_email")
-      .text("🌐 Social Media", "referral_social")
-      .row()
-      .text("🔙 Main Menu", "menu_main");
+      .text("🔙 Menu główne", "menu_main");
   },
 
-  // Enhanced help menu
+  // Help menu
   help() {
     return new InlineKeyboard()
-      .webApp("🌐 Help Center", `${config.webAppUrl}/help`)
+      .webApp("🌐 Centrum pomocy", `${config.webAppUrl}/help`)
       .row()
-      .text("📖 Tutorial", "help_tutorial")
-      .text("🚀 Quick Start", "help_quickstart")
+      .text("📖 Samouczek", "help_tutorial")
+      .text("🚀 Szybki start", "help_quickstart")
       .row()
-      .text("❓ FAQ", "support_faq")
-      .text("🔧 Troubleshoot", "help_troubleshoot")
+      .text("❓ FAQ", "help_faq")
+      .text("🔧 Rozwiązywanie problemów", "help_troubleshoot")
       .row()
-      .text("📞 Contact", "support_contact")
-      .text("📡 Status", "support_status")
+      .text("📞 Kontakt", "support_contact")
+      .text("📡 Status systemu", "support_status")
       .row()
-      .text("📝 Feedback", "support_feedback")
-      .text("📖 Glossary", "help_glossary")
+      .text("📝 Opinia", "support_feedback")
+      .text("📖 Słownik", "help_glossary")
       .row()
-      .text("🔙 Main Menu", "menu_main");
+      .text("🔙 Menu główne", "menu_main");
   },
 
   // Settings menu
   settings() {
     return new InlineKeyboard()
-      .webApp("⚙️ Full Settings", `${config.webAppUrl}/settings`)
+      .webApp("⚙️ Pełne ustawienia", `${config.webAppUrl}/settings`)
       .row()
-      .text("👤 Profile", "settings_profile")
-      .text("🔔 Notifications", "settings_notifications")
+      .text("👤 Profil", "settings_profile")
+      .text("🔔 Powiadomienia", "settings_notifications")
       .row()
-      .text("🔐 Security", "settings_security")
-      .text("🛡️ Privacy", "settings_privacy")
+      .text("🔐 Bezpieczeństwo", "settings_security")
+      .text("🛡️ Prywatność", "settings_privacy")
       .row()
-      .text("🌐 Language", "settings_language")
-      .text("🎨 Theme", "settings_theme")
+      .text("🌐 Język", "settings_language")
+      .text("🎨 Motyw", "settings_theme")
       .row()
-      .text("📊 Display", "settings_display")
-      .text("🔕 Mute", "settings_mute")
+      .text("📊 Wyświetlanie", "settings_display")
+      .text("🔕 Wycisz", "settings_mute")
       .row()
-      .text("🔙 Main Menu", "menu_main");
+      .text("🔙 Menu główne", "menu_main");
   },
 
   // ==========================================================================
@@ -145,119 +191,156 @@ export const MainMenu = {
   // Withdrawal options menu
   withdraw() {
     return new InlineKeyboard()
-      .webApp("💸 Withdraw Now", `${config.webAppUrl}/withdraw`)
+      .webApp("💸 Wypłać teraz", `${config.webAppUrl}/withdraw`)
       .row()
-      .text("🏦 Bank Transfer", "withdraw_bank")
+      .text("🏦 Przelew bankowy", "withdraw_bank")
       .text("₿ Bitcoin", "withdraw_btc")
       .row()
       .text("Ξ Ethereum", "withdraw_eth")
       .text("💎 USDT", "withdraw_usdt")
       .row()
-      .text("📊 Calculator", "wallet_withdraw_calc")
-      .text("ℹ️ Fees", "wallet_withdraw_fees")
+      .text("🧮 Kalkulator", "withdraw_calculator")
+      .text("ℹ️ Opłaty", "withdraw_fees")
       .row()
-      .text("📈 Limits", "withdraw_limits")
-      .text("⏱️ History", "withdraw_history")
+      .text("📈 Limity", "withdraw_limits")
+      .text("⏱️ Historia", "withdraw_history")
       .row()
-      .text("🔙 Wallet", "menu_wallet");
+      .text("🔙 Portfel", "menu_wallet");
   },
 
   // Deposit options menu
   deposit() {
     return new InlineKeyboard()
-      .webApp("💰 Deposit Now", `${config.webAppUrl}/deposit`)
+      .webApp("💰 Wpłać teraz", `${config.webAppUrl}/deposit`)
       .row()
-      .text("💳 Card", "deposit_card")
-      .text("🏦 Bank", "deposit_bank")
+      .text("💳 Karta", "deposit_card")
+      .text("🏦 Przelew", "deposit_bank")
       .row()
       .text("₿ Bitcoin", "deposit_btc")
       .text("Ξ Ethereum", "deposit_eth")
       .row()
       .text("💎 USDT", "deposit_usdt")
-      .text("📊 Calculator", "wallet_deposit_calc")
+      .text("🧮 Kalkulator", "deposit_calculator")
       .row()
-      .text("📈 Projections", "wallet_deposit_projections")
-      .text("🎁 Bonuses", "deposit_bonuses")
+      .text("📈 Projekcje", "deposit_projections")
+      .text("🎁 Bonusy", "deposit_bonuses")
       .row()
-      .text("🔙 Wallet", "menu_wallet");
+      .text("🔙 Portfel", "menu_wallet");
   },
 
   // Staking options menu
   staking() {
     return new InlineKeyboard()
-      .webApp("🔒 Stake Now", `${config.webAppUrl}/staking`)
+      .webApp("🔒 Program oszczędnościowy", `${config.webAppUrl}/staking`)
       .row()
-      .text("🥉 Bronze", "stake_bronze")
-      .text("🥈 Silver", "stake_silver")
+      .text("🥉 Brązowy (30 dni)", "stake_bronze")
+      .text("🥈 Srebrny (90 dni)", "stake_silver")
       .row()
-      .text("🥇 Gold", "stake_gold")
-      .text("💎 Diamond", "stake_diamond")
+      .text("🥇 Złoty (180 dni)", "stake_gold")
+      .text("💎 Diamentowy (365 dni)", "stake_diamond")
       .row()
-      .text("🧮 Calculator", "wallet_stake_calc")
-      .text("📊 Compare", "wallet_stake_compare")
+      .text("🧮 Kalkulator", "stake_calculator")
+      .text("📊 Porównaj", "stake_compare")
       .row()
-      .text("📈 Returns", "stake_returns")
-      .text("⏳ Unstake", "stake_unstake")
+      .text("📈 Zwroty", "stake_returns")
+      .text("⏳ Wypłać", "stake_unstake")
       .row()
-      .text("🔙 Wallet", "menu_wallet");
+      .text("🔙 Inwestycje", "menu_investments");
   },
 
-  // Mining boost menu
-  boost() {
+  // Gold investment menu
+  goldInvestment() {
     return new InlineKeyboard()
-      .webApp("⚡ Buy Boost", `${config.webAppUrl}/mining/boost`)
+      .webApp("🥇 Kup złoto", `${config.webAppUrl}/gold`)
       .row()
-      .text("🚀 2x Boost", "boost_2x")
-      .text("🚀 3x Boost", "boost_3x")
+      .text("📊 Sztabki", "gold_bars")
+      .text("🪙 Monety", "gold_coins")
       .row()
-      .text("🚀 5x Boost", "boost_5x")
-      .text("🚀 10x Boost", "boost_10x")
+      .text("📈 Aktualne ceny", "gold_prices")
+      .text("🧮 Kalkulator", "gold_calculator")
       .row()
-      .text("📊 Calculator", "mining_boost_calc")
-      .text("⏱️ Duration", "boost_duration")
+      .text("📦 Odbiór/Dostawa", "gold_delivery")
+      .text("🔒 Przechowanie", "gold_storage")
       .row()
-      .text("💰 Cost", "boost_cost")
-      .text("🎁 Promo", "boost_promo")
+      .text("💡 Dlaczego złoto?", "gold_why")
+      .text("🔙 Inwestycje", "menu_investments");
+  },
+
+  // Silver investment menu
+  silverInvestment() {
+    return new InlineKeyboard()
+      .webApp("🥈 Kup srebro", `${config.webAppUrl}/silver`)
       .row()
-      .text("🔙 Mining", "menu_mining");
+      .text("📊 Sztabki", "silver_bars")
+      .text("🪙 Monety", "silver_coins")
+      .row()
+      .text("📈 Aktualne ceny", "silver_prices")
+      .text("🧮 Kalkulator", "silver_calculator")
+      .row()
+      .text("📦 Odbiór/Dostawa", "silver_delivery")
+      .text("🔒 Przechowanie", "silver_storage")
+      .row()
+      .text("💡 Dlaczego srebro?", "silver_why")
+      .text("🔙 Inwestycje", "menu_investments");
+  },
+
+  // Exchange rates menu
+  rates() {
+    return new InlineKeyboard()
+      .webApp("📊 Pełna tabela kursów", `${config.webAppUrl}/rates`)
+      .row()
+      .text("₿ Bitcoin", "rate_btc")
+      .text("Ξ Ethereum", "rate_eth")
+      .row()
+      .text("💎 USDT", "rate_usdt")
+      .text("💰 Inne krypto", "rate_others")
+      .row()
+      .text("🥇 Złoto", "rate_gold")
+      .text("🥈 Srebro", "rate_silver")
+      .row()
+      .text("📈 Wykresy", "rates_charts")
+      .text("🔔 Alerty cenowe", "rates_alerts")
+      .row()
+      .text("🔄 Odśwież", "rates_refresh")
+      .text("🔙 Menu główne", "menu_main");
   },
 
   // Support contact menu
   contact() {
     return new InlineKeyboard()
-      .url("📧 Email", "mailto:support@cashimine.com")
-      .url("💬 Live Chat", `${config.webAppUrl}/support/chat`)
+      .url("📧 Email", "mailto:kontakt@cashymine.pl")
+      .url("💬 Czat na żywo", `${config.webAppUrl}/support/chat`)
       .row()
-      .url("📱 Telegram", "https://t.me/cashimine_support")
-      .url("🐦 Twitter", "https://twitter.com/cashimine_help")
+      .url("📱 Telegram", "https://t.me/cashymine_support")
+      .url("🐦 Twitter", "https://twitter.com/cashymine")
       .row()
-      .text("📞 Callback", "support_callback")
-      .text("📝 Ticket", "support_ticket")
+      .text("📞 Oddzwonienie", "support_callback")
+      .text("📝 Zgłoszenie", "support_ticket")
       .row()
-      .text("🏢 Office", "support_office")
-      .text("👥 Community", "support_community")
+      .text("🏢 Biuro", "support_office")
+      .text("👥 Społeczność", "support_community")
       .row()
-      .text("🔙 Help", "menu_help");
+      .text("🔙 Pomoc", "menu_help");
   },
 
   // Tutorial/learning menu
   tutorial() {
     return new InlineKeyboard()
-      .webApp("📚 Learn Hub", `${config.webAppUrl}/learn`)
+      .webApp("📚 Centrum edukacji", `${config.webAppUrl}/learn`)
       .row()
-      .text("🎬 Video Guide", "tutorial_video")
-      .text("📖 Step-by-Step", "tutorial_steps")
+      .text("🎬 Poradnik wideo", "tutorial_video")
+      .text("📖 Krok po kroku", "tutorial_steps")
       .row()
-      .text("❓ Common Questions", "tutorial_faq")
-      .text("⚡ Tips & Tricks", "tutorial_tips")
+      .text("❓ Częste pytania", "tutorial_faq")
+      .text("⚡ Wskazówki", "tutorial_tips")
       .row()
-      .text("📊 Best Practices", "tutorial_best")
-      .text("⚠️ Avoid Mistakes", "tutorial_mistakes")
+      .text("📊 Najlepsze praktyki", "tutorial_best")
+      .text("⚠️ Unikaj błędów", "tutorial_mistakes")
       .row()
-      .text("📈 Advanced", "tutorial_advanced")
-      .text("🎓 Certification", "tutorial_cert")
+      .text("📈 Zaawansowane", "tutorial_advanced")
+      .text("🎓 Certyfikat", "tutorial_cert")
       .row()
-      .text("🔙 Help", "menu_help");
+      .text("🔙 Pomoc", "menu_help");
   },
 
   // ==========================================================================
@@ -267,82 +350,82 @@ export const MainMenu = {
   // Main admin panel
   admin() {
     return new InlineKeyboard()
-      .text("📊 Statistics", "admin_stats")
-      .text("👥 Users", "admin_users")
+      .text("📊 Statystyki", "admin_stats")
+      .text("👥 Użytkownicy", "admin_users")
       .row()
-      .text("💰 Transactions", "admin_tx")
-      .text("⛏️ Mining", "admin_mining")
+      .text("💰 Transakcje", "admin_transactions")
+      .text("💱 Wymiany", "admin_exchanges")
       .row()
-      .text("🛠️ Maintenance", "admin_maintenance")
-      .text("🔐 Security", "admin_security")
+      .text("🛠️ Konserwacja", "admin_maintenance")
+      .text("🔐 Bezpieczeństwo", "admin_security")
       .row()
-      .text("📢 Broadcast", "admin_broadcast")
-      .text("💾 Backup", "admin_backup")
+      .text("📢 Ogłoszenie", "admin_broadcast")
+      .text("💾 Kopia zapasowa", "admin_backup")
       .row()
-      .text("📈 Analytics", "admin_analytics")
-      .text("⚙️ Settings", "admin_settings")
+      .text("📈 Analityka", "admin_analytics")
+      .text("⚙️ Ustawienia", "admin_settings")
       .row()
-      .text("🚨 Alerts", "admin_alerts")
-      .text("📋 Logs", "admin_logs")
+      .text("🚨 Alerty", "admin_alerts")
+      .text("📋 Logi", "admin_logs")
       .row()
-      .text("🔙 Main Menu", "menu_main");
+      .text("🔙 Menu główne", "menu_main");
   },
 
   // Admin statistics submenu
   adminStats() {
     return new InlineKeyboard()
-      .text("📈 User Growth", "admin_stats_users")
-      .text("💰 Revenue", "admin_stats_revenue")
+      .text("📈 Wzrost użytkowników", "admin_stats_users")
+      .text("💰 Przychody", "admin_stats_revenue")
       .row()
-      .text("⛏️ Mining Stats", "admin_stats_mining")
-      .text("👥 Referrals", "admin_stats_referrals")
+      .text("💱 Statystyki wymian", "admin_stats_exchanges")
+      .text("👥 Polecenia", "admin_stats_referrals")
       .row()
-      .text("📊 Performance", "admin_stats_perf")
-      .text("🌍 Geographic", "admin_stats_geo")
+      .text("📊 Wydajność", "admin_stats_performance")
+      .text("🌍 Geografia", "admin_stats_geo")
       .row()
-      .text("📅 Daily", "admin_stats_daily")
-      .text("📅 Weekly", "admin_stats_weekly")
+      .text("📅 Dziennie", "admin_stats_daily")
+      .text("📅 Tygodniowo", "admin_stats_weekly")
       .row()
-      .text("📅 Monthly", "admin_stats_monthly")
-      .text("📤 Export", "admin_stats_export")
+      .text("📅 Miesięcznie", "admin_stats_monthly")
+      .text("📤 Eksport", "admin_stats_export")
       .row()
-      .text("🔙 Admin Panel", "menu_admin");
+      .text("🔙 Panel admina", "menu_admin");
   },
 
   // User management menu
   adminUsers() {
     return new InlineKeyboard()
-      .text("👤 Search User", "admin_user_search")
-      .text("📊 User Details", "admin_user_details")
+      .text("👤 Szukaj użytkownika", "admin_user_search")
+      .text("📊 Szczegóły", "admin_user_details")
       .row()
-      .text("🔧 Edit User", "admin_user_edit")
-      .text("🚫 Ban User", "admin_user_ban")
+      .text("🔧 Edytuj", "admin_user_edit")
+      .text("🚫 Zablokuj", "admin_user_ban")
       .row()
-      .text("✅ Unban User", "admin_user_unban")
-      .text("📧 Message User", "admin_user_message")
+      .text("✅ Odblokuj", "admin_user_unban")
+      .text("📧 Wiadomość", "admin_user_message")
       .row()
-      .text("👑 Make Admin", "admin_user_makeadmin")
-      .text("👤 Remove Admin", "admin_user_removeadmin")
+      .text("👑 Nadaj admina", "admin_user_makeadmin")
+      .text("👤 Odbierz admina", "admin_user_removeadmin")
       .row()
-      .text("💰 Adjust Balance", "admin_user_balance")
-      .text("🎁 Give Bonus", "admin_user_bonus")
+      .text("💰 Dostosuj saldo", "admin_user_balance")
+      .text("🎁 Daj bonus", "admin_user_bonus")
       .row()
-      .text("🔙 Admin Panel", "menu_admin");
+      .text("🔙 Panel admina", "menu_admin");
   },
 
   // Maintenance control menu
   adminMaintenance() {
     return new InlineKeyboard()
-      .text("🛠️ Enable", "admin_maintenance_enable")
-      .text("✅ Disable", "admin_maintenance_disable")
+      .text("🛠️ Włącz", "admin_maintenance_enable")
+      .text("✅ Wyłącz", "admin_maintenance_disable")
       .row()
-      .text("⏱️ Schedule", "admin_maintenance_schedule")
-      .text("📢 Notify", "admin_maintenance_notify")
+      .text("⏱️ Zaplanuj", "admin_maintenance_schedule")
+      .text("📢 Powiadom", "admin_maintenance_notify")
       .row()
       .text("🔄 Restart", "admin_maintenance_restart")
       .text("📊 Status", "admin_maintenance_status")
       .row()
-      .text("🔙 Admin Panel", "menu_admin");
+      .text("🔙 Panel admina", "menu_admin");
   },
 
   // ==========================================================================
@@ -352,79 +435,79 @@ export const MainMenu = {
   // Quick actions for fast access
   quickActions() {
     return new InlineKeyboard()
-      .text("⛏️ Mine Now", "mining_start")
-      .text("💰 Check Balance", "wallet_balance")
+      .text("💱 Wymień teraz", "exchange_quick")
+      .text("💰 Sprawdź saldo", "wallet_balance")
       .row()
-      .text("💸 Quick Withdraw", "action_withdraw")
-      .text("💰 Quick Deposit", "action_deposit")
+      .text("💸 Szybka wypłata", "action_withdraw")
+      .text("💰 Szybka wpłata", "action_deposit")
       .row()
-      .text("👥 Invite Friend", "referral_share")
-      .text("📊 View Stats", "action_stats")
+      .text("👥 Zaproś znajomego", "referral_share")
+      .text("📊 Zobacz statystyki", "action_stats")
       .row()
-      .text("🆘 Get Help", "menu_help")
-      .text("⚙️ Settings", "menu_settings");
+      .text("🆘 Pomoc", "menu_help")
+      .text("⚙️ Ustawienia", "menu_settings");
   },
 
   // Transaction history filters
   historyFilters() {
     return new InlineKeyboard()
-      .text("📅 Today", "history_today")
-      .text("📅 Week", "history_week")
+      .text("📅 Dzisiaj", "history_today")
+      .text("📅 Tydzień", "history_week")
       .row()
-      .text("📅 Month", "history_month")
-      .text("📅 All", "history_all")
+      .text("📅 Miesiąc", "history_month")
+      .text("📅 Wszystko", "history_all")
       .row()
-      .text("⛏️ Mining", "history_mining")
-      .text("👥 Referral", "history_referral")
+      .text("💱 Wymiany", "history_exchanges")
+      .text("👥 Polecenia", "history_referrals")
       .row()
-      .text("💸 Withdrawal", "history_withdrawal")
-      .text("💰 Deposit", "history_deposit")
+      .text("💸 Wypłaty", "history_withdrawals")
+      .text("💰 Wpłaty", "history_deposits")
       .row()
-      .text("📤 Export", "history_export")
-      .text("🔙 Wallet", "menu_wallet");
+      .text("📤 Eksport", "history_export")
+      .text("🔙 Portfel", "menu_wallet");
   },
 
   // Notification settings
   notificationSettings() {
     return new InlineKeyboard()
-      .text("🔔 All", "notify_all")
-      .text("🔕 None", "notify_none")
+      .text("🔔 Wszystkie", "notify_all")
+      .text("🔕 Żadne", "notify_none")
       .row()
-      .text("💰 Earnings", "notify_earnings")
-      .text("💸 Withdrawals", "notify_withdrawals")
+      .text("💰 Zarobki", "notify_earnings")
+      .text("💸 Wypłaty", "notify_withdrawals")
       .row()
-      .text("👥 Referrals", "notify_referrals")
-      .text("🎯 Missions", "notify_missions")
+      .text("👥 Polecenia", "notify_referrals")
+      .text("💱 Wymiany", "notify_exchanges")
       .row()
-      .text("📢 Announcements", "notify_announcements")
+      .text("📢 Ogłoszenia", "notify_announcements")
       .text("⚠️ System", "notify_system")
       .row()
       .text("📱 Push", "notify_push")
       .text("📧 Email", "notify_email")
       .row()
       .text("💬 Telegram", "notify_telegram")
-      .text("🔙 Settings", "menu_settings");
+      .text("🔙 Ustawienia", "menu_settings");
   },
 
   // Security settings
   securitySettings() {
     return new InlineKeyboard()
-      .text("🔐 Enable 2FA", "security_2fa_enable")
-      .text("🔓 Disable 2FA", "security_2fa_disable")
+      .text("🔐 Włącz 2FA", "security_2fa_enable")
+      .text("🔓 Wyłącz 2FA", "security_2fa_disable")
       .row()
-      .text("🔑 Change Password", "security_password")
-      .text("📧 Email Verify", "security_email")
+      .text("🔑 Zmień hasło", "security_password")
+      .text("📧 Weryfikacja email", "security_email")
       .row()
-      .text("📱 Device Management", "security_devices")
-      .text("📋 Session Log", "security_sessions")
+      .text("📱 Zarządzanie urządzeniami", "security_devices")
+      .text("📋 Log sesji", "security_sessions")
       .row()
-      .text("🚫 IP Whitelist", "security_ip")
-      .text("⚠️ Activity Alerts", "security_alerts")
+      .text("🚫 Whitelist IP", "security_ip")
+      .text("⚠️ Alerty aktywności", "security_alerts")
       .row()
-      .text("🔒 Withdrawal Lock", "security_withdrawal")
-      .text("🏦 Cold Wallet", "security_coldwallet")
+      .text("🔒 Blokada wypłat", "security_withdrawal_lock")
+      .text("📋 Whitelist adresów", "security_address_whitelist")
       .row()
-      .text("🔙 Settings", "menu_settings");
+      .text("🔙 Ustawienia", "menu_settings");
   },
 
   // ==========================================================================
@@ -433,15 +516,15 @@ export const MainMenu = {
 
   // Back navigation helper
   backTo(menu: string) {
-    return new InlineKeyboard().text("🔙 Back", `menu_${menu}`);
+    return new InlineKeyboard().text("🔙 Powrót", `menu_${menu}`);
   },
 
   // Confirmation dialog
   confirm(action: string, id?: string | number) {
     const key = id ? `${action}_${id}` : action;
     return new InlineKeyboard()
-      .text("✅ Confirm", `confirm_${key}_yes`)
-      .text("❌ Cancel", `confirm_${key}_no`);
+      .text("✅ Potwierdź", `confirm_${key}_yes`)
+      .text("❌ Anuluj", `confirm_${key}_no`);
   },
 
   // Pagination controls
@@ -449,16 +532,16 @@ export const MainMenu = {
     const keyboard = new InlineKeyboard();
 
     if (page > 1) {
-      keyboard.text("⬅️ Previous", `${action}_page_${page - 1}`);
+      keyboard.text("⬅️ Poprzednia", `${action}_page_${page - 1}`);
     }
 
     keyboard.text(`📄 ${page}/${totalPages}`, `${action}_current`);
 
     if (page < totalPages) {
-      keyboard.text("Next ➡️", `${action}_page_${page + 1}`);
+      keyboard.text("Następna ➡️", `${action}_page_${page + 1}`);
     }
 
-    keyboard.row().text("🔙 Back", `${action}_back`);
+    keyboard.row().text("🔙 Powrót", `${action}_back`);
 
     return keyboard;
   },
@@ -474,64 +557,36 @@ export const MainMenu = {
       keyboard.text(item.label, `${action}_${item.value}`);
     });
 
-    keyboard.row().text("🔙 Cancel", `${action}_cancel`);
+    keyboard.row().text("🔙 Anuluj", `${action}_cancel`);
 
     return keyboard;
-  },
-
-  // Quick numeric input (e.g., amount selection)
-  numericInput(action: string) {
-    return new InlineKeyboard()
-      .text("1", `${action}_1`)
-      .text("2", `${action}_2`)
-      .text("3", `${action}_3`)
-      .row()
-      .text("4", `${action}_4`)
-      .text("5", `${action}_5`)
-      .text("6", `${action}_6`)
-      .row()
-      .text("7", `${action}_7`)
-      .text("8", `${action}_8`)
-      .text("9", `${action}_9`)
-      .row()
-      .text(".", `${action}_dot`)
-      .text("0", `${action}_0`)
-      .text("⌫", `${action}_backspace`)
-      .row()
-      .text("✅ Confirm", `${action}_confirm`)
-      .text("❌ Clear", `${action}_clear`)
-      .row()
-      .text("🔙 Cancel", `${action}_cancel`);
   },
 
   // Language selection
   languageSelection() {
     return new InlineKeyboard()
+      .text("🇵🇱 Polski", "language_pl")
       .text("🇺🇸 English", "language_en")
+      .row()
+      .text("🇩🇪 Deutsch", "language_de")
       .text("🇪🇸 Español", "language_es")
       .row()
       .text("🇫🇷 Français", "language_fr")
-      .text("🇩🇪 Deutsch", "language_de")
-      .row()
       .text("🇷🇺 Русский", "language_ru")
-      .text("🇨🇳 中文", "language_zh")
       .row()
-      .text("🇯🇵 日本語", "language_ja")
-      .text("🇰🇷 한국어", "language_ko")
-      .row()
-      .text("🔙 Settings", "menu_settings");
+      .text("🔙 Ustawienia", "menu_settings");
   },
 
   // Theme selection
   themeSelection() {
     return new InlineKeyboard()
-      .text("🌞 Light", "theme_light")
-      .text("🌙 Dark", "theme_dark")
+      .text("🌞 Jasny", "theme_light")
+      .text("🌙 Ciemny", "theme_dark")
       .row()
       .text("🌓 Auto", "theme_auto")
-      .text("🎨 Custom", "theme_custom")
+      .text("🎨 Własny", "theme_custom")
       .row()
-      .text("🔙 Settings", "menu_settings");
+      .text("🔙 Ustawienia", "menu_settings");
   },
 };
 
